@@ -23,6 +23,7 @@ public class BankApplication extends JFrame {
 	ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
 	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	private final static int TABLE_SIZE = 29;
+	static String fileToSaveAs = "";
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
@@ -210,7 +211,6 @@ public class BankApplication extends JFrame {
 				
 				saveOpenValues();
 				
-				currentItem=0;
 				while(!table.containsKey(currentItem)){
 					currentItem++;
 				}
@@ -218,21 +218,7 @@ public class BankApplication extends JFrame {
 			}
 		};
 		
-//		ActionListener next = new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				saveOpenValues();
-//				// No next if at end of list.
-//				if (currentItem != (table.size()-1)) {
-//					// Move to next item.
-//						currentItem++;
-//					while(!table.containsKey(currentItem) ){
-//						currentItem++;
-//					}
-//					displayDetails(currentItem);			
-//				}				
-//			}
-//		};
-		
+
 		ActionListener next1 = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
@@ -274,12 +260,10 @@ public class BankApplication extends JFrame {
 				}
 				
 				int minKey = Collections.min(keyList);
-//				System.out.println(minKey);
 				
 				if(currentItem>minKey){
 					currentItem--;
 					while(!table.containsKey(currentItem)){
-						//System.out.println("Current: " + currentItem + ", min key: " + minKey);
 						currentItem--;
 					}
 				}
@@ -602,7 +586,7 @@ public class BankApplication extends JFrame {
 			
 	   } // end method openFile
 	
-	static String fileToSaveAs = "";
+	
 	
 	public static void openFileWrite()
 	   {
@@ -746,7 +730,7 @@ public static void saveToFile(){
 	}
 
 	public static void writeFile(){
-		openFileWrite();
+		//openFileWrite();
 		saveToFile();
 //		addRecords();
 		closeFile();

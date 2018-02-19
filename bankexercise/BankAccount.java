@@ -22,12 +22,7 @@ public class BankAccount {
 		this.overdraft = overdraft;
 	}
 	
-	public BankAccount(){
-		this(0, "", "", "", "", 0.0, 0.0);
-	}
-	
-	
-	
+
 	public int getAccountID() {
 		return accountID;
 	}
@@ -85,8 +80,6 @@ public class BankAccount {
 		this.overdraft = overdraft;
 	}
 	
-	public String toString(){
-		return "\nAccount id: " + accountID +  "Account Num: " + accountNumber + "\nName: " + surname + " " + firstName+"\n";
-	}
+
 
 }
