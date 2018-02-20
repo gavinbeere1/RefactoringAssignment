@@ -39,7 +39,7 @@ public class BankApplication extends JFrame {
 	JTable jTable;
 	double interestRate;
 	
-	int currentItem = 0;
+	int currentItem;
 	
 	
 	boolean openValues;
@@ -109,7 +109,7 @@ public class BankApplication extends JFrame {
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
 
 		nextItemButton = new JButton(new ImageIcon("next.png"));
-		prevItemButton = new JButton(new ImageIcon("previous.png"));
+		prevItemButton = new JButton(new ImageIcon("prev.png"));
 		firstItemButton = new JButton(new ImageIcon("first.png"));
 		lastItemButton = new JButton(new ImageIcon("last.png"));
 		
@@ -211,6 +211,7 @@ public class BankApplication extends JFrame {
 				
 				saveOpenValues();
 				
+				currentItem=0;
 				while(!table.containsKey(currentItem)){
 					currentItem++;
 				}
@@ -275,11 +276,10 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				saveOpenValues();
 				
-				currentItem =29;
-								
+				currentItem = table.size();
+				
 				while(!table.containsKey(currentItem)){
 					currentItem--;
-					
 				}
 				
 				displayDetails(currentItem);
@@ -336,6 +336,7 @@ public class BankApplication extends JFrame {
 				 String interestRateStr = JOptionPane.showInputDialog("Enter Interest Rate: (do not type the % sign)");
 				 if(interestRateStr!=null)
 					 interestRate = Double.parseDouble(interestRateStr);
+				 
 			
 			}
 		});
@@ -487,13 +488,14 @@ public class BankApplication extends JFrame {
 		withdraw.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
-				String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
+				
 				
 				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 					
 
 					if(accNum.equals(entry.getValue().getAccountNumber().trim())){
 						
+						String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
 						
 						if(entry.getValue().getAccountType().trim().equals("Current")){
 							if(Double.parseDouble(toWithdraw) > entry.getValue().getBalance() + entry.getValue().getOverdraft())
@@ -511,7 +513,10 @@ public class BankApplication extends JFrame {
 							else
 								JOptionPane.showMessageDialog(null, "Insufficient funds.");
 						}
-					}					
+					}
+					else
+						JOptionPane.showMessageDialog(null, "No Account Found.");
+					
 				}
 			}
 		});
@@ -519,10 +524,9 @@ public class BankApplication extends JFrame {
 		calcInterest.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
-					if(entry.getValue().getAccountType().equals("Deposit")){
+					if(entry.getValue().getAccountType().equals("Current")){
 						double equation = 1 + ((interestRate)/100);
 						entry.getValue().setBalance(entry.getValue().getBalance()*equation);
-//						System.out.println(equation);
 						JOptionPane.showMessageDialog(null, "Balances Updated");
 						displayDetails(entry.getKey());
 					}
@@ -588,22 +592,7 @@ public class BankApplication extends JFrame {
 	
 	
 	
-	public static void openFileWrite()
-	   {
-		if(fileToSaveAs!=""){
-	      try // open file
-	      {
-	         output = new RandomAccessFile( fileToSaveAs, "rw" );
-	         JOptionPane.showMessageDialog(null, "Accounts saved to " + fileToSaveAs);
-	      } // end try
-	      catch ( IOException ioException )
-	      {
-	    	  JOptionPane.showMessageDialog(null, "File does not exist.");
-	      } // end catch
-		}
-		else
-			saveToFileAs();
-	   }
+
 	
 	public static void saveToFileAs()
 	   {
@@ -646,7 +635,7 @@ public class BankApplication extends JFrame {
 	      catch ( IOException ioException )
 	      {
 	         
-	    	  JOptionPane.showMessageDialog(null, "Error closing file.");//System.exit( 1 );
+	    	  JOptionPane.showMessageDialog(null, "Error closing file.");
 	      } // end catch
 	   } // end method closeFile
 	
@@ -730,9 +719,8 @@ public static void saveToFile(){
 	}
 
 	public static void writeFile(){
-		//openFileWrite();
+	
 		saveToFile();
-//		addRecords();
 		closeFile();
 	}
 	
