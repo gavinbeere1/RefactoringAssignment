@@ -27,21 +27,15 @@ public class BankApplication extends JFrame {
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
-	JMenuItem nextItem, prevItem, firstItem, lastItem, findByAccount, findBySurname, listAll;
-	JMenuItem createItem, modifyItem, deleteItem, setOverdraft, setInterest;
-	JMenuItem deposit, withdraw, calcInterest;
-	JMenuItem open, save, saveAs;
-	JMenuItem closeApp;
+	JMenuItem closeApp, open, save, saveAs, nextItem, prevItem, firstItem, lastItem, findByAccount, findBySurname, listAll,  createItem, modifyItem, deleteItem, setOverdraft, setInterest, deposit, withdraw, calcInterest;
 	JButton firstItemButton, lastItemButton, nextItemButton, prevItemButton;
 	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
 	JTextField accountIDTextField, accountNumberTextField, firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	static JFileChooser filechooser;
 	JTable jTable;
 	double interestRate;
-	
+	private static RandomAccessFile input, output;
 	int currentItem;
-	
-	
 	boolean openValues;
 	
 	public BankApplication() {
@@ -560,8 +554,7 @@ public class BankApplication extends JFrame {
 	
 	}
 	
-	private static RandomAccessFile input;
-	private static RandomAccessFile output;
+	
 
 	
 	public static void openFileRead()
