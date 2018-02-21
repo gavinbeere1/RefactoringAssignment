@@ -24,3 +24,5 @@
 /CreateBankDialog.class
 /RandomAccessBankAccount.class
 /ReadRecordsTest.class
+/BankApplicationGUI.class
+/FileSaving.class
