@@ -9,13 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+
 
 import net.miginfocom.swing.MigLayout;
 
@@ -28,22 +23,7 @@ public class CreateBankDialog extends JFrame {
 	ArrayList<BankAccount> accountList;
 
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
-	
-	
-	
-	
-	public void put(int key, BankAccount value){
-		int hash = (key%TABLE_SIZE);
 
-		while(table.containsKey(key)){
-			hash = hash+1;
-		}
-		table.put(hash, value);
-	}
-	
-	
-	
-	
 	// Constructor code based on that for the Create and Edit dialog classes in the Shapes exercise.
 
 	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
@@ -74,8 +54,7 @@ public class CreateBankDialog extends JFrame {
 		final JComboBox comboBox = new JComboBox(comboTypes);
 		
 		
-		accountNumberLabel = new JLabel("Photograph file name: ");
-		accountNumberTextField = new JTextField(15);
+	
 		
 		accountNumberLabel = new JLabel("Account Number: ");
 		accountNumberTextField = new JTextField(15);
