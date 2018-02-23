@@ -1,6 +1,6 @@
 package bankexercise;
 
-import java.io.EOFException;
+import java.io.EOFException; 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,15 +14,7 @@ public class FileSaving extends BankApplication {
 
 
 	
-	public void saveOpenValues(){		
-		if (openValues){
-			surnameTextField.setEditable(false);
-			firstNameTextField.setEditable(false);
-				
-			table.get(currentItem).setSurname(surnameTextField.getText());
-			table.get(currentItem).setFirstName(firstNameTextField.getText());
-		}
-	}	
+
 	
 	public void displayDetails(int currentItem) {	
 				

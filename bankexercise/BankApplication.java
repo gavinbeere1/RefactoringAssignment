@@ -206,16 +206,23 @@ public class BankApplication extends JFrame{
 				
 				saveOpenValues();
 				
-				currentItem=0;
-				while(!table.containsKey(currentItem)){
-					currentItem++;
-				}
-				displayDetails(currentItem);
+				
+					
+					currentItem=0;
+					while(!table.containsKey(currentItem) && !table.isEmpty()){
+						currentItem++;
+					
+					displayDetails(currentItem);
+					
+				
+				
+				
+					}
 			}
 		};
 		
 
-		ActionListener next1 = new ActionListener(){
+		ActionListener next = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
 				ArrayList<Integer> keyList = new ArrayList<Integer>();
@@ -233,7 +240,7 @@ public class BankApplication extends JFrame{
 		
 					if(currentItem<maxKey){
 						currentItem++;
-						while(!table.containsKey(currentItem)){
+						while(!table.containsKey(currentItem) && !table.isEmpty()){
 							currentItem++;
 						}
 					}
@@ -259,7 +266,7 @@ public class BankApplication extends JFrame{
 				
 				if(currentItem>minKey){
 					currentItem--;
-					while(!table.containsKey(currentItem)){
+					while(!table.containsKey(currentItem) && !table.isEmpty()){
 						currentItem--;
 					}
 				}
@@ -272,7 +279,7 @@ public class BankApplication extends JFrame{
 				saveOpenValues();
 
 				currentItem = TABLE_SIZE;
-				while(!table.containsKey(currentItem)){
+				while(!table.containsKey(currentItem) && !table.isEmpty()){
 					currentItem--;
 				}
 				
@@ -280,8 +287,8 @@ public class BankApplication extends JFrame{
 			}
 		};
 		
-		nextItemButton.addActionListener(next1);
-		nextItem.addActionListener(next1);
+		nextItemButton.addActionListener(next);
+		nextItem.addActionListener(next);
 		
 		prevItemButton.addActionListener(prev);
 		prevItem.addActionListener(prev);
@@ -295,6 +302,12 @@ public class BankApplication extends JFrame{
 		deleteItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 						
+				if (table.size() == 1)
+				{
+					table.remove(1);
+					
+				}
+				else {
 							table.remove(currentItem);
 							JOptionPane.showMessageDialog(null, "Account Deleted");
 							
@@ -304,6 +317,7 @@ public class BankApplication extends JFrame{
 								currentItem++;
 							}
 							displayDetails(currentItem);
+				}
 							
 			}
 		});
@@ -360,7 +374,6 @@ public class BankApplication extends JFrame{
 				}
 				frame.setSize(600,500);
 				frame.add(scrollPane);
-//				frame.pack();
 		        frame.setVisible(true);			
 			}
 		});
@@ -471,7 +484,6 @@ public class BankApplication extends JFrame{
 						String toDeposit = JOptionPane.showInputDialog("Account found, Enter Amount to Deposit: ");
 						entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
 						displayDetails(entry.getKey());
-//						balanceTextField.setText(entry.getValue().getBalance()+"");
 					}
 				}
 				if (!found)

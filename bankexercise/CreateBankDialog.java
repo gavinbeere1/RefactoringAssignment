@@ -126,20 +126,20 @@ public class CreateBankDialog extends JFrame {
 			
 				String accountType = comboBox.getSelectedItem().toString();
 				
-
+				int accountNumber2 = Integer.parseInt(accountNumber);
 				
 		
-				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
+				if (accountNumber != null && accountNumber.length()==8 && !surname.isEmpty()  && !firstName.isEmpty()  && accountType != null && accountNumber2 > 0) {
 					try {
 						
 						boolean accNumTaken=false;
 							
-							int randNumber = rand.nextInt(24) + 1;
+							int accId = 1;
 						
 						 for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 							 
-							 while(randNumber == entry.getValue().getAccountID()){
-								 randNumber = rand.nextInt(24)+1;
+							 while(accId == entry.getValue().getAccountID()){
+								 accId++;
 							 }		 
 						 }
 					 
@@ -153,7 +153,7 @@ public class CreateBankDialog extends JFrame {
 						if(!accNumTaken){
 						
 						
-							BankAccount account = new BankAccount(randNumber, accountNumber, surname, firstName, accountType, 0.0, 0.0);
+							BankAccount account = new BankAccount(accId, accountNumber, surname, firstName, accountType, 0.0, 0.0);
 						
 							
 							int key = Integer.parseInt(account.getAccountNumber());
@@ -173,7 +173,7 @@ public class CreateBankDialog extends JFrame {
 						JOptionPane.showMessageDialog(null, "Number format exception");					
 					}
 				}
-				else JOptionPane.showMessageDialog(null, "Please make sure all fields have values, and Account Number is a unique 8 digit number");
+				else JOptionPane.showMessageDialog(null, "Please make sure all fields have values, and Account Number is a positive unique 8 digit number");
 				dispose();
 			}
 		});
